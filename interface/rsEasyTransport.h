@@ -20,7 +20,7 @@
  *  Boston, MA  02110-1301, USA.
  ****************************************************************/
 
-// interface class for p3NetExample service
+// interface class for p3EasyTransport service
 //
 
 #pragma once
@@ -31,18 +31,18 @@
 #include <vector>
 #include <retroshare/rstypes.h>
 
-class RsNetExample ;
-extern RsNetExample *rsNetExample;
+class RsEasyTransport ;
+extern RsEasyTransport *rsEasyTransport;
  
-static const uint32_t CONFIG_TYPE_NetExample_PLUGIN 		= 0xe001 ;
+static const uint32_t CONFIG_TYPE_EasyTransport_PLUGIN 		= 0xe001 ;
 
-class RsNetExamplePongResult
+class RsEasyTransportPongResult
 {
 	public:
-	RsNetExamplePongResult()
+	RsEasyTransportPongResult()
 	:mTS(0), mRTT(0), mOffset(0) { return; }
 
-	RsNetExamplePongResult(double ts, double rtt, double offset)
+	RsEasyTransportPongResult(double ts, double rtt, double offset)
 	:mTS(ts), mRTT(rtt), mOffset(offset) { return; }
 
 	double mTS;
@@ -50,38 +50,38 @@ class RsNetExamplePongResult
 	double mOffset;
 };
 
-struct RsNetExampleDataChunk
+struct RsEasyTransportDataChunk
 {
-	typedef enum { RS_NetExample_DATA_TYPE_AUDIO, RS_NetExample_DATA_TYPE_VIDEO } RsNetExampleDataType ;
+	typedef enum { RS_EasyTransport_DATA_TYPE_AUDIO, RS_EasyTransport_DATA_TYPE_VIDEO } RsEasyTransportDataType ;
 
 	void *data ; // create/delete using malloc/free.
 	uint32_t size ;
-	RsNetExampleDataType type ;	// video or audio
+	RsEasyTransportDataType type ;	// video or audio
 };
 
-class RsNetExample
+class RsEasyTransport
 {
 	public:
-		virtual int sendNetExampleHangUpCall(const RsPeerId& peer_id) = 0;
-		virtual int sendNetExampleRinging(const RsPeerId& peer_id) = 0;
-		virtual int sendNetExampleAcceptCall(const RsPeerId& peer_id) = 0;
+		virtual int sendEasyTransportHangUpCall(const RsPeerId& peer_id) = 0;
+		virtual int sendEasyTransportRinging(const RsPeerId& peer_id) = 0;
+		virtual int sendEasyTransportAcceptCall(const RsPeerId& peer_id) = 0;
 
 	virtual void ping_all() = 0;
 	virtual void broadcast_paint(int x, int y) = 0;
 	virtual void msg_all(std::string msg) = 0;
 		// Sending data. The client keeps the memory ownership and must delete it after calling this.
-		virtual int sendNetExampleData(const RsPeerId& peer_id,const RsNetExampleDataChunk& chunk) = 0;
+		virtual int sendEasyTransportData(const RsPeerId& peer_id,const RsEasyTransportDataChunk& chunk) = 0;
 
 		// The server fill in the data and gives up memory ownership. The client must delete the memory
 		// in each chunk once it has been used.
 		//
-		virtual bool getIncomingData(const RsPeerId& peer_id,std::vector<RsNetExampleDataChunk>& chunks) = 0;
+		virtual bool getIncomingData(const RsPeerId& peer_id,std::vector<RsEasyTransportDataChunk>& chunks) = 0;
 
 		typedef enum { AudioTransmitContinous = 0, AudioTransmitVAD = 1, AudioTransmitPushToTalk = 2 } enumAudioTransmit ;
 
 		// Config stuff
 
-		virtual uint32_t getPongResults(const RsPeerId& id, int n, std::list<RsNetExamplePongResult> &results) = 0;
+		virtual uint32_t getPongResults(const RsPeerId& id, int n, std::list<RsEasyTransportPongResult> &results) = 0;
 };
 
 

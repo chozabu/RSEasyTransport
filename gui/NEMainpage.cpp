@@ -1,10 +1,10 @@
 #include "NEMainpage.h"
 #include "ui_NEMainpage.h"
-//#include "services/p3NetExample.h"
-#include "interface/rsNetExample.h"
+//#include "services/p3EasyTransport.h"
+#include "interface/rsEasyTransport.h"
 
 
-NEMainpage::NEMainpage(QWidget *parent, NetExampleNotify *notify) :
+NEMainpage::NEMainpage(QWidget *parent, EasyTransportNotify *notify) :
 	MainPage(parent),
 	mNotify(notify),
 	ui(new Ui::NEMainpage)
@@ -25,12 +25,12 @@ NEMainpage::~NEMainpage()
 
 void NEMainpage::mmEvent(int x, int y)
 {
-	rsNetExample->broadcast_paint(x,y);
+	rsEasyTransport->broadcast_paint(x,y);
 }
 
 void NEMainpage::on_pingAllButton_clicked()
 {
-	rsNetExample->ping_all();
+	rsEasyTransport->ping_all();
 	NeMsgArrived(rsPeers->getOwnId(),"ping");
 }
 
@@ -58,7 +58,7 @@ void NEMainpage::NePaintArrived(const RsPeerId &peer_id, int x, int y)
 
 void NEMainpage::on_broadcastButton_clicked()
 {
-	rsNetExample->msg_all(ui->msgInput->text().toStdString());
+	rsEasyTransport->msg_all(ui->msgInput->text().toStdString());
 	NeMsgArrived(rsPeers->getOwnId(),ui->msgInput->text());
 	ui->msgInput->clear();
 }

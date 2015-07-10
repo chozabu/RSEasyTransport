@@ -23,7 +23,7 @@
 #include "serialiser/rsbaseserial.h"
 #include "serialiser/rstlvbase.h"
 
-#include "services/rsNetExampleItems.h"
+#include "services/rsEasyTransportItems.h"
 
 /***
 #define RSSERIAL_DEBUG 1
@@ -34,9 +34,9 @@
 #define HOLLERITH_LEN_SPEC 4
 /*************************************************************************/
 
-std::ostream& RsNetExamplePingItem::print(std::ostream &out, uint16_t indent)
+std::ostream& RsEasyTransportPingItem::print(std::ostream &out, uint16_t indent)
 {
-	printRsItemBase(out, "RsNetExamplePingItem", indent);
+	printRsItemBase(out, "RsEasyTransportPingItem", indent);
 	uint16_t int_Indent = indent + 2;
 	printIndent(out, int_Indent);
 	out << "SeqNo: " << mSeqNo << std::endl;
@@ -44,13 +44,13 @@ std::ostream& RsNetExamplePingItem::print(std::ostream &out, uint16_t indent)
 	printIndent(out, int_Indent);
 	out << "PingTS: " << std::hex << mPingTS << std::dec << std::endl;
 
-	printRsItemEnd(out, "RsNetExamplePingItem", indent);
+	printRsItemEnd(out, "RsEasyTransportPingItem", indent);
 	return out;
 }
 
-std::ostream& RsNetExamplePongItem::print(std::ostream &out, uint16_t indent)
+std::ostream& RsEasyTransportPongItem::print(std::ostream &out, uint16_t indent)
 {
-	printRsItemBase(out, "RsNetExamplePongItem", indent);
+	printRsItemBase(out, "RsEasyTransportPongItem", indent);
 	uint16_t int_Indent = indent + 2;
 	printIndent(out, int_Indent);
 	out << "SeqNo: " << mSeqNo << std::endl;
@@ -61,12 +61,12 @@ std::ostream& RsNetExamplePongItem::print(std::ostream &out, uint16_t indent)
 	printIndent(out, int_Indent);
 	out << "PongTS: " << std::hex << mPongTS << std::dec << std::endl;
 
-	printRsItemEnd(out, "RsNetExamplePongItem", indent);
+	printRsItemEnd(out, "RsEasyTransportPongItem", indent);
 	return out;
 }
-std::ostream& RsNetExampleProtocolItem::print(std::ostream &out, uint16_t indent)
+std::ostream& RsEasyTransportProtocolItem::print(std::ostream &out, uint16_t indent)
 {
-	printRsItemBase(out, "RsNetExampleProtocolItem", indent);
+	printRsItemBase(out, "RsEasyTransportProtocolItem", indent);
 	uint16_t int_Indent = indent + 2;
 	printIndent(out, int_Indent);
 	out << "flags: " << flags << std::endl;
@@ -74,12 +74,12 @@ std::ostream& RsNetExampleProtocolItem::print(std::ostream &out, uint16_t indent
 	printIndent(out, int_Indent);
 	out << "protocol: " << std::hex << protocol << std::dec << std::endl;
 
-	printRsItemEnd(out, "RsNetExampleProtocolItem", indent);
+	printRsItemEnd(out, "RsEasyTransportProtocolItem", indent);
 	return out;
 }
-std::ostream& RsNetExamplePaintItem::print(std::ostream &out, uint16_t indent)
+std::ostream& RsEasyTransportPaintItem::print(std::ostream &out, uint16_t indent)
 {
-	printRsItemBase(out, "RsNetExamplePaintItem", indent);
+	printRsItemBase(out, "RsEasyTransportPaintItem", indent);
 	uint16_t int_Indent = indent + 2;
 	printIndent(out, int_Indent);
 	out << "x: " << x << std::endl;
@@ -87,12 +87,12 @@ std::ostream& RsNetExamplePaintItem::print(std::ostream &out, uint16_t indent)
 	printIndent(out, int_Indent);
 	out << "y: " << y << std::endl;
 
-	printRsItemEnd(out, "RsNetExamplePaintItem", indent);
+	printRsItemEnd(out, "RsEasyTransportPaintItem", indent);
 	return out;
 }
-std::ostream& RsNetExampleDataItem::print(std::ostream &out, uint16_t indent)
+std::ostream& RsEasyTransportDataItem::print(std::ostream &out, uint16_t indent)
 {
-	printRsItemBase(out, "RsNetExampleDataItem", indent);
+	printRsItemBase(out, "RsEasyTransportDataItem", indent);
 	uint16_t int_Indent = indent + 2;
 	printIndent(out, int_Indent);
 	out << "flags: " << flags << std::endl;
@@ -100,12 +100,12 @@ std::ostream& RsNetExampleDataItem::print(std::ostream &out, uint16_t indent)
 	printIndent(out, int_Indent);
 	out << "data size: " << std::hex << data_size << std::dec << std::endl;
 
-	printRsItemEnd(out, "RsNetExampleDataItem", indent);
+	printRsItemEnd(out, "RsEasyTransportDataItem", indent);
 	return out;
 }
 
 /*************************************************************************/
-uint32_t RsNetExampleDataItem::serial_size() const
+uint32_t RsEasyTransportDataItem::serial_size() const
 {
 	uint32_t s = 8; /* header */
 	s += 4; /* flags */
@@ -115,7 +115,7 @@ uint32_t RsNetExampleDataItem::serial_size() const
 
 	return s;
 }
-uint32_t RsNetExampleProtocolItem::serial_size() const
+uint32_t RsEasyTransportProtocolItem::serial_size() const
 {
 	uint32_t s = 8; /* header */
 	s += 4; /* flags */
@@ -123,7 +123,7 @@ uint32_t RsNetExampleProtocolItem::serial_size() const
 
 	return s;
 }
-uint32_t RsNetExamplePaintItem::serial_size() const
+uint32_t RsEasyTransportPaintItem::serial_size() const
 {
 	uint32_t s = 8; /* header */
 	s += 4; /* x */
@@ -131,7 +131,7 @@ uint32_t RsNetExamplePaintItem::serial_size() const
 
 	return s;
 }
-uint32_t RsNetExamplePingItem::serial_size() const
+uint32_t RsEasyTransportPingItem::serial_size() const
 {
 	uint32_t s = 8; /* header */
 	s += 4; /* seqno */
@@ -139,7 +139,7 @@ uint32_t RsNetExamplePingItem::serial_size() const
 
 	return s;
 }
-bool RsNetExampleProtocolItem::serialise(void *data, uint32_t& pktsize)
+bool RsEasyTransportProtocolItem::serialise(void *data, uint32_t& pktsize)
 {
 	uint32_t tlvsize = serial_size() ;
 	uint32_t offset = 0;
@@ -154,8 +154,8 @@ bool RsNetExampleProtocolItem::serialise(void *data, uint32_t& pktsize)
 	ok &= setRsItemHeader(data, tlvsize, PacketId(), tlvsize);
 
 #ifdef RSSERIAL_DEBUG
-	std::cerr << "RsNetExampleSerialiser::serialiseNetExampleDataItem() Header: " << ok << std::endl;
-	std::cerr << "RsNetExampleSerialiser::serialiseNetExampleDataItem() Size: " << tlvsize << std::endl;
+	std::cerr << "RsEasyTransportSerialiser::serialiseEasyTransportDataItem() Header: " << ok << std::endl;
+	std::cerr << "RsEasyTransportSerialiser::serialiseEasyTransportDataItem() Size: " << tlvsize << std::endl;
 #endif
 
 	/* skip the header */
@@ -168,12 +168,12 @@ bool RsNetExampleProtocolItem::serialise(void *data, uint32_t& pktsize)
 	if (offset != tlvsize)
 	{
 		ok = false;
-		std::cerr << "RsNetExampleSerialiser::serialiseNetExamplePingItem() Size Error! " << std::endl;
+		std::cerr << "RsEasyTransportSerialiser::serialiseEasyTransportPingItem() Size Error! " << std::endl;
 	}
 
 	return ok;
 }
-bool RsNetExamplePaintItem::serialise(void *data, uint32_t& pktsize)
+bool RsEasyTransportPaintItem::serialise(void *data, uint32_t& pktsize)
 {
 	uint32_t tlvsize = serial_size() ;
 	uint32_t offset = 0;
@@ -188,8 +188,8 @@ bool RsNetExamplePaintItem::serialise(void *data, uint32_t& pktsize)
 	ok &= setRsItemHeader(data, tlvsize, PacketId(), tlvsize);
 
 #ifdef RSSERIAL_DEBUG
-	std::cerr << "RsNetExampleSerialiser::serialiseNetExampleDataItem() Header: " << ok << std::endl;
-	std::cerr << "RsNetExampleSerialiser::serialiseNetExampleDataItem() Size: " << tlvsize << std::endl;
+	std::cerr << "RsEasyTransportSerialiser::serialiseEasyTransportDataItem() Header: " << ok << std::endl;
+	std::cerr << "RsEasyTransportSerialiser::serialiseEasyTransportDataItem() Size: " << tlvsize << std::endl;
 #endif
 
 	/* skip the header */
@@ -202,13 +202,13 @@ bool RsNetExamplePaintItem::serialise(void *data, uint32_t& pktsize)
 	if (offset != tlvsize)
 	{
 		ok = false;
-		std::cerr << "RsNetExampleSerialiser::serialiseNetExamplePingItem() Size Error! " << std::endl;
+		std::cerr << "RsEasyTransportSerialiser::serialiseEasyTransportPingItem() Size Error! " << std::endl;
 	}
 
 	return ok;
 }
 /* serialise the data to the buffer */
-bool RsNetExampleDataItem::serialise(void *data, uint32_t& pktsize)
+bool RsEasyTransportDataItem::serialise(void *data, uint32_t& pktsize)
 {
 	uint32_t tlvsize = serial_size() ;
 	uint32_t offset = 0;
@@ -223,8 +223,8 @@ bool RsNetExampleDataItem::serialise(void *data, uint32_t& pktsize)
 	ok &= setRsItemHeader(data, tlvsize, PacketId(), tlvsize);
 
 #ifdef RSSERIAL_DEBUG
-	std::cerr << "RsNetExampleSerialiser::serialiseNetExampleDataItem() Header: " << ok << std::endl;
-	std::cerr << "RsNetExampleSerialiser::serialiseNetExampleDataItem() Size: " << tlvsize << std::endl;
+	std::cerr << "RsEasyTransportSerialiser::serialiseEasyTransportDataItem() Header: " << ok << std::endl;
+	std::cerr << "RsEasyTransportSerialiser::serialiseEasyTransportDataItem() Size: " << tlvsize << std::endl;
 #endif
 
 	/* skip the header */
@@ -245,7 +245,7 @@ bool RsNetExampleDataItem::serialise(void *data, uint32_t& pktsize)
 	if (offset != tlvsize)
 	{
 		ok = false;
-		std::cerr << "RsNetExampleSerialiser::serialiseNetExamplePingItem() Size Error! " << std::endl;
+		std::cerr << "RsEasyTransportSerialiser::serialiseEasyTransportPingItem() Size Error! " << std::endl;
 		std::cerr << "expected " << tlvsize << " got " << offset << std::endl;
 		std::cerr << "m_msg looks like " << m_msg << std::endl;
 	}
@@ -253,7 +253,7 @@ bool RsNetExampleDataItem::serialise(void *data, uint32_t& pktsize)
 	return ok;
 }
 /* serialise the data to the buffer */
-bool RsNetExamplePingItem::serialise(void *data, uint32_t& pktsize)
+bool RsEasyTransportPingItem::serialise(void *data, uint32_t& pktsize)
 {
 	uint32_t tlvsize = serial_size() ;
 	uint32_t offset = 0;
@@ -268,8 +268,8 @@ bool RsNetExamplePingItem::serialise(void *data, uint32_t& pktsize)
 	ok &= setRsItemHeader(data, tlvsize, PacketId(), tlvsize);
 
 #ifdef RSSERIAL_DEBUG
-	std::cerr << "RsNetExampleSerialiser::serialiseNetExamplePingItem() Header: " << ok << std::endl;
-	std::cerr << "RsNetExampleSerialiser::serialiseNetExamplePingItem() Size: " << tlvsize << std::endl;
+	std::cerr << "RsEasyTransportSerialiser::serialiseEasyTransportPingItem() Header: " << ok << std::endl;
+	std::cerr << "RsEasyTransportSerialiser::serialiseEasyTransportPingItem() Size: " << tlvsize << std::endl;
 #endif
 
 	/* skip the header */
@@ -282,14 +282,14 @@ bool RsNetExamplePingItem::serialise(void *data, uint32_t& pktsize)
 	if (offset != tlvsize)
 	{
 		ok = false;
-		std::cerr << "RsNetExampleSerialiser::serialiseNetExamplePingItem() Size Error! " << std::endl;
+		std::cerr << "RsEasyTransportSerialiser::serialiseEasyTransportPingItem() Size Error! " << std::endl;
 	}
 
 	return ok;
 }
 
-RsNetExampleProtocolItem::RsNetExampleProtocolItem(void *data, uint32_t pktsize)
-	: RsNetExampleItem(RS_PKT_SUBTYPE_NetExample_PROTOCOL)
+RsEasyTransportProtocolItem::RsEasyTransportProtocolItem(void *data, uint32_t pktsize)
+	: RsEasyTransportItem(RS_PKT_SUBTYPE_EasyTransport_PROTOCOL)
 {
 	/* get the type and size */
 	uint32_t rstype = getRsItemId(data);
@@ -297,7 +297,7 @@ RsNetExampleProtocolItem::RsNetExampleProtocolItem(void *data, uint32_t pktsize)
 
 	uint32_t offset = 0;
 
-	if ((RS_PKT_VERSION_SERVICE != getRsItemVersion(rstype)) || (RS_SERVICE_TYPE_NetExample_PLUGIN != getRsItemService(rstype)) || (RS_PKT_SUBTYPE_NetExample_PROTOCOL != getRsItemSubType(rstype)))
+	if ((RS_PKT_VERSION_SERVICE != getRsItemVersion(rstype)) || (RS_SERVICE_TYPE_EasyTransport_PLUGIN != getRsItemService(rstype)) || (RS_PKT_SUBTYPE_EasyTransport_PROTOCOL != getRsItemSubType(rstype)))
 		throw std::runtime_error("Wrong packet type!") ;
 
 	if (pktsize < rssize)    /* check size */
@@ -318,8 +318,8 @@ RsNetExampleProtocolItem::RsNetExampleProtocolItem(void *data, uint32_t pktsize)
 	if (!ok)
 		throw std::runtime_error("Deserialisation error!") ;
 }
-RsNetExamplePaintItem::RsNetExamplePaintItem(void *data, uint32_t pktsize)
-	: RsNetExampleItem(RS_PKT_SUBTYPE_NetExample_PAINT)
+RsEasyTransportPaintItem::RsEasyTransportPaintItem(void *data, uint32_t pktsize)
+	: RsEasyTransportItem(RS_PKT_SUBTYPE_EasyTransport_PAINT)
 {
 	/* get the type and size */
 	uint32_t rstype = getRsItemId(data);
@@ -327,7 +327,7 @@ RsNetExamplePaintItem::RsNetExamplePaintItem(void *data, uint32_t pktsize)
 
 	uint32_t offset = 0;
 
-	if ((RS_PKT_VERSION_SERVICE != getRsItemVersion(rstype)) || (RS_SERVICE_TYPE_NetExample_PLUGIN != getRsItemService(rstype)) || (RS_PKT_SUBTYPE_NetExample_PAINT != getRsItemSubType(rstype)))
+	if ((RS_PKT_VERSION_SERVICE != getRsItemVersion(rstype)) || (RS_SERVICE_TYPE_EasyTransport_PLUGIN != getRsItemService(rstype)) || (RS_PKT_SUBTYPE_EasyTransport_PAINT != getRsItemSubType(rstype)))
 		throw std::runtime_error("Wrong packet type!") ;
 
 	if (pktsize < rssize)    /* check size */
@@ -348,8 +348,8 @@ RsNetExamplePaintItem::RsNetExamplePaintItem(void *data, uint32_t pktsize)
 	if (!ok)
 		throw std::runtime_error("Deserialisation error!") ;
 }
-RsNetExamplePingItem::RsNetExamplePingItem(void *data, uint32_t pktsize)
-	: RsNetExampleItem(RS_PKT_SUBTYPE_NetExample_PING)
+RsEasyTransportPingItem::RsEasyTransportPingItem(void *data, uint32_t pktsize)
+	: RsEasyTransportItem(RS_PKT_SUBTYPE_EasyTransport_PING)
 {
 	/* get the type and size */
 	uint32_t rstype = getRsItemId(data);
@@ -358,7 +358,7 @@ RsNetExamplePingItem::RsNetExamplePingItem(void *data, uint32_t pktsize)
 	uint32_t offset = 0;
 
 
-	if ((RS_PKT_VERSION_SERVICE != getRsItemVersion(rstype)) || (RS_SERVICE_TYPE_NetExample_PLUGIN != getRsItemService(rstype)) || (RS_PKT_SUBTYPE_NetExample_PING != getRsItemSubType(rstype)))
+	if ((RS_PKT_VERSION_SERVICE != getRsItemVersion(rstype)) || (RS_SERVICE_TYPE_EasyTransport_PLUGIN != getRsItemService(rstype)) || (RS_PKT_SUBTYPE_EasyTransport_PING != getRsItemSubType(rstype)))
 		throw std::runtime_error("Wrong packet type!") ;
 
 	if (pktsize < rssize)    /* check size */
@@ -384,7 +384,7 @@ RsNetExamplePingItem::RsNetExamplePingItem(void *data, uint32_t pktsize)
 /*************************************************************************/
 
 
-uint32_t RsNetExamplePongItem::serial_size() const
+uint32_t RsEasyTransportPongItem::serial_size() const
 {
 	uint32_t s = 8; /* header */
 	s += 4; /* seqno */
@@ -395,7 +395,7 @@ uint32_t RsNetExamplePongItem::serial_size() const
 }
 
 /* serialise the data to the buffer */
-bool RsNetExamplePongItem::serialise(void *data, uint32_t& pktsize)
+bool RsEasyTransportPongItem::serialise(void *data, uint32_t& pktsize)
 {
 	uint32_t tlvsize = serial_size() ;
 	uint32_t offset = 0;
@@ -410,8 +410,8 @@ bool RsNetExamplePongItem::serialise(void *data, uint32_t& pktsize)
 	ok &= setRsItemHeader(data, tlvsize, PacketId(), tlvsize);
 
 #ifdef RSSERIAL_DEBUG
-	std::cerr << "RsNetExampleSerialiser::serialiseNetExamplePongItem() Header: " << ok << std::endl;
-	std::cerr << "RsNetExampleSerialiser::serialiseNetExamplePongItem() Size: " << tlvsize << std::endl;
+	std::cerr << "RsEasyTransportSerialiser::serialiseEasyTransportPongItem() Header: " << ok << std::endl;
+	std::cerr << "RsEasyTransportSerialiser::serialiseEasyTransportPongItem() Size: " << tlvsize << std::endl;
 #endif
 
 	/* skip the header */
@@ -425,13 +425,13 @@ bool RsNetExamplePongItem::serialise(void *data, uint32_t& pktsize)
 	if (offset != tlvsize)
 	{
 		ok = false;
-		std::cerr << "RsNetExampleSerialiser::serialiseNetExamplePongItem() Size Error! " << std::endl;
+		std::cerr << "RsEasyTransportSerialiser::serialiseEasyTransportPongItem() Size Error! " << std::endl;
 	}
 
 	return ok;
 }
-RsNetExampleDataItem::RsNetExampleDataItem(void *data, uint32_t pktsize)
-	: RsNetExampleItem(RS_PKT_SUBTYPE_NetExample_DATA)
+RsEasyTransportDataItem::RsEasyTransportDataItem(void *data, uint32_t pktsize)
+	: RsEasyTransportItem(RS_PKT_SUBTYPE_EasyTransport_DATA)
 {
 	/* get the type and size */
 	uint32_t rstype = getRsItemId(data);
@@ -439,7 +439,7 @@ RsNetExampleDataItem::RsNetExampleDataItem(void *data, uint32_t pktsize)
 
 	uint32_t offset = 0;
 
-	if ((RS_PKT_VERSION_SERVICE != getRsItemVersion(rstype)) || (RS_SERVICE_TYPE_NetExample_PLUGIN != getRsItemService(rstype)) || (RS_PKT_SUBTYPE_NetExample_DATA != getRsItemSubType(rstype)))
+	if ((RS_PKT_VERSION_SERVICE != getRsItemVersion(rstype)) || (RS_SERVICE_TYPE_EasyTransport_PLUGIN != getRsItemService(rstype)) || (RS_PKT_SUBTYPE_EasyTransport_DATA != getRsItemSubType(rstype)))
 		throw std::runtime_error("Wrong packet subtype") ;
 
 	if (pktsize < rssize)    /* check size */
@@ -467,8 +467,8 @@ RsNetExampleDataItem::RsNetExampleDataItem(void *data, uint32_t pktsize)
 	if (!ok)
 		throw std::runtime_error("Serialization error.") ;
 }
-RsNetExamplePongItem::RsNetExamplePongItem(void *data, uint32_t pktsize)
-	: RsNetExampleItem(RS_PKT_SUBTYPE_NetExample_PONG)
+RsEasyTransportPongItem::RsEasyTransportPongItem(void *data, uint32_t pktsize)
+	: RsEasyTransportItem(RS_PKT_SUBTYPE_EasyTransport_PONG)
 {
 	/* get the type and size */
 	uint32_t rstype = getRsItemId(data);
@@ -476,7 +476,7 @@ RsNetExamplePongItem::RsNetExamplePongItem(void *data, uint32_t pktsize)
 
 	uint32_t offset = 0;
 
-	if ((RS_PKT_VERSION_SERVICE != getRsItemVersion(rstype)) || (RS_SERVICE_TYPE_NetExample_PLUGIN != getRsItemService(rstype)) || (RS_PKT_SUBTYPE_NetExample_PONG != getRsItemSubType(rstype)))
+	if ((RS_PKT_VERSION_SERVICE != getRsItemVersion(rstype)) || (RS_SERVICE_TYPE_EasyTransport_PLUGIN != getRsItemService(rstype)) || (RS_PKT_SUBTYPE_EasyTransport_PONG != getRsItemSubType(rstype)))
 		throw std::runtime_error("Wrong packet subtype") ;
 
 	if (pktsize < rssize)    /* check size */
@@ -501,27 +501,27 @@ RsNetExamplePongItem::RsNetExamplePongItem(void *data, uint32_t pktsize)
 
 /*************************************************************************/
 
-RsItem* RsNetExampleSerialiser::deserialise(void *data, uint32_t *pktsize)
+RsItem* RsEasyTransportSerialiser::deserialise(void *data, uint32_t *pktsize)
 {
 #ifdef RSSERIAL_DEBUG
-	std::cerr << "RsNetExampleSerialiser::deserialise()" << std::endl;
+	std::cerr << "RsEasyTransportSerialiser::deserialise()" << std::endl;
 #endif
 
 	/* get the type and size */
 	uint32_t rstype = getRsItemId(data);
 
-	if ((RS_PKT_VERSION_SERVICE != getRsItemVersion(rstype)) || (RS_SERVICE_TYPE_NetExample_PLUGIN != getRsItemService(rstype)))
+	if ((RS_PKT_VERSION_SERVICE != getRsItemVersion(rstype)) || (RS_SERVICE_TYPE_EasyTransport_PLUGIN != getRsItemService(rstype)))
 		return NULL ;
 	
 	try
 	{
 		switch(getRsItemSubType(rstype))
 		{
-			case RS_PKT_SUBTYPE_NetExample_PING: 		return new RsNetExamplePingItem(data, *pktsize);
-			case RS_PKT_SUBTYPE_NetExample_PONG: 		return new RsNetExamplePongItem(data, *pktsize);
-			case RS_PKT_SUBTYPE_NetExample_PROTOCOL: 	return new RsNetExampleProtocolItem(data, *pktsize);
-			case RS_PKT_SUBTYPE_NetExample_PAINT:		return new RsNetExamplePaintItem(data, *pktsize);
-			case RS_PKT_SUBTYPE_NetExample_DATA: 		return new RsNetExampleDataItem(data, *pktsize);
+			case RS_PKT_SUBTYPE_EasyTransport_PING: 		return new RsEasyTransportPingItem(data, *pktsize);
+			case RS_PKT_SUBTYPE_EasyTransport_PONG: 		return new RsEasyTransportPongItem(data, *pktsize);
+			case RS_PKT_SUBTYPE_EasyTransport_PROTOCOL: 	return new RsEasyTransportProtocolItem(data, *pktsize);
+			case RS_PKT_SUBTYPE_EasyTransport_PAINT:		return new RsEasyTransportPaintItem(data, *pktsize);
+			case RS_PKT_SUBTYPE_EasyTransport_DATA: 		return new RsEasyTransportDataItem(data, *pktsize);
 
 			default:
 				return NULL;
@@ -529,7 +529,7 @@ RsItem* RsNetExampleSerialiser::deserialise(void *data, uint32_t *pktsize)
 	}
 	catch(std::exception& e)
 	{
-		std::cerr << "RsNetExampleSerialiser: deserialization error: " << e.what() << std::endl;
+		std::cerr << "RsEasyTransportSerialiser: deserialization error: " << e.what() << std::endl;
 		return NULL;
 	}
 }

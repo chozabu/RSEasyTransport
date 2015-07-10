@@ -5,7 +5,7 @@
 #include <retroshare-gui/mainpage.h>
 #include <retroshare/rsfiles.h>
 #include <retroshare/rspeers.h>
-#include "gui/NetExampleNotify.h"
+#include "gui/EasyTransportNotify.h"
 
 
 
@@ -20,7 +20,7 @@ class NEMainpage : public MainPage
 	Q_OBJECT
 
 public:
-	explicit NEMainpage(QWidget *parent, NetExampleNotify *notify);
+	explicit NEMainpage(QWidget *parent, EasyTransportNotify *notify);
 	~NEMainpage();
 
 private slots:
@@ -33,7 +33,7 @@ private slots:
 	void NePaintArrived(const RsPeerId &peer_id, int x, int y);
 private:
 	Ui::NEMainpage *ui;
-	NetExampleNotify *mNotify;
+	EasyTransportNotify *mNotify;
 };
 
 #endif // NEMAINPAGE_H

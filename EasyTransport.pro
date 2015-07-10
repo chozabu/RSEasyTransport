@@ -33,26 +33,26 @@ win32 {
 
 QMAKE_CXXFLAGS *= -Wall
 
-SOURCES = NetExamplePlugin.cpp               \
-          services/p3NetExample.cc           \
-          services/rsNetExampleItems.cc \
+SOURCES = EasyTransportPlugin.cpp               \
+          services/p3EasyTransport.cc           \
+          services/rsEasyTransportItems.cc \
     gui/NEMainpage.cpp \
-    gui/NetExampleNotify.cpp \
+    gui/EasyTransportNotify.cpp \
     gui/paintwidget.cpp
 
-HEADERS = NetExamplePlugin.h                 \
-          services/p3NetExample.h            \
-          services/rsNetExampleItems.h       \
-          interface/rsNetExample.h \
+HEADERS = EasyTransportPlugin.h                 \
+          services/p3EasyTransport.h            \
+          services/rsEasyTransportItems.h       \
+          interface/rsEasyTransport.h \
     gui/NEMainpage.h \
-    gui/NetExampleNotify.h \
+    gui/EasyTransportNotify.h \
     gui/paintwidget.h
 
 #FORMS   = gui/AudioInputConfig.ui
 
-TARGET = NetExample
+TARGET = EasyTransport
 
-RESOURCES = gui/NetExample_images.qrc
+RESOURCES = gui/EasyTransport_images.qrc
 
 
 LIBS += -lspeex -lspeexdsp

@@ -23,7 +23,7 @@
 #pragma once
 
 /*
- * libretroshare/src/serialiser: rsNetExampleItems.h
+ * libretroshare/src/serialiser: rsEasyTransportItems.h
  *
  * RetroShare Serialiser.
  *
@@ -54,29 +54,29 @@
 
 /**************************************************************************/
 
-const uint16_t RS_SERVICE_TYPE_NetExample_PLUGIN = 0xb031;
+const uint16_t RS_SERVICE_TYPE_EasyTransport_PLUGIN = 0xb031;
 
-const uint8_t RS_PKT_SUBTYPE_NetExample_PING 	   = 0x01;
-const uint8_t RS_PKT_SUBTYPE_NetExample_PONG 	   = 0x02;
-const uint8_t RS_PKT_SUBTYPE_NetExample_PROTOCOL   = 0x03 ;//unused!
-const uint8_t RS_PKT_SUBTYPE_NetExample_PAINT	   = 0x04 ;
-const uint8_t RS_PKT_SUBTYPE_NetExample_DATA      	= 0x05 ;
+const uint8_t RS_PKT_SUBTYPE_EasyTransport_PING 	   = 0x01;
+const uint8_t RS_PKT_SUBTYPE_EasyTransport_PONG 	   = 0x02;
+const uint8_t RS_PKT_SUBTYPE_EasyTransport_PROTOCOL   = 0x03 ;//unused!
+const uint8_t RS_PKT_SUBTYPE_EasyTransport_PAINT	   = 0x04 ;
+const uint8_t RS_PKT_SUBTYPE_EasyTransport_DATA      	= 0x05 ;
 
-const uint8_t QOS_PRIORITY_RS_NetExample = 9 ;
+const uint8_t QOS_PRIORITY_RS_EasyTransport = 9 ;
 
-const uint32_t RS_NetExample_FLAGS_VIDEO_DATA = 0x0001 ;
-const uint32_t RS_NetExample_FLAGS_AUDIO_DATA = 0x0002 ;
+const uint32_t RS_EasyTransport_FLAGS_VIDEO_DATA = 0x0001 ;
+const uint32_t RS_EasyTransport_FLAGS_AUDIO_DATA = 0x0002 ;
 
-class RsNetExampleItem: public RsItem
+class RsEasyTransportItem: public RsItem
 {
 	public:
-		RsNetExampleItem(uint8_t net_example_subtype)
-			: RsItem(RS_PKT_VERSION_SERVICE,RS_SERVICE_TYPE_NetExample_PLUGIN,net_example_subtype)
+		RsEasyTransportItem(uint8_t net_example_subtype)
+			: RsItem(RS_PKT_VERSION_SERVICE,RS_SERVICE_TYPE_EasyTransport_PLUGIN,net_example_subtype)
 		{ 
-			setPriorityLevel(QOS_PRIORITY_RS_NetExample) ;
+			setPriorityLevel(QOS_PRIORITY_RS_EasyTransport) ;
 		}	
 
-		virtual ~RsNetExampleItem() {};
+		virtual ~RsEasyTransportItem() {};
 		virtual void clear() {};
 		virtual std::ostream& print(std::ostream &out, uint16_t indent = 0) = 0 ;
 
@@ -84,32 +84,32 @@ class RsNetExampleItem: public RsItem
 		virtual uint32_t serial_size() const = 0 ; 							// deserialise is handled using a constructor
 };
 
-class RsNetExamplePingItem: public RsNetExampleItem
+class RsEasyTransportPingItem: public RsEasyTransportItem
 {
 	public:
-		RsNetExamplePingItem() :RsNetExampleItem(RS_PKT_SUBTYPE_NetExample_PING) {}
-		RsNetExamplePingItem(void *data,uint32_t size) ;
+		RsEasyTransportPingItem() :RsEasyTransportItem(RS_PKT_SUBTYPE_EasyTransport_PING) {}
+		RsEasyTransportPingItem(void *data,uint32_t size) ;
 
 		virtual bool serialise(void *data,uint32_t& size) ;	
 		virtual uint32_t serial_size() const ; 						
 
-		virtual ~RsNetExamplePingItem() {}
+		virtual ~RsEasyTransportPingItem() {}
 		virtual std::ostream& print(std::ostream &out, uint16_t indent = 0);
 
 		uint32_t mSeqNo;
 		uint64_t mPingTS;
 };
 
-class RsNetExamplePongItem: public RsNetExampleItem
+class RsEasyTransportPongItem: public RsEasyTransportItem
 {
 	public:
-		RsNetExamplePongItem() :RsNetExampleItem(RS_PKT_SUBTYPE_NetExample_PONG) {}
-		RsNetExamplePongItem(void *data,uint32_t size) ;
+		RsEasyTransportPongItem() :RsEasyTransportItem(RS_PKT_SUBTYPE_EasyTransport_PONG) {}
+		RsEasyTransportPongItem(void *data,uint32_t size) ;
 
 		virtual bool serialise(void *data,uint32_t& size) ;
 		virtual uint32_t serial_size() const ;
 
-		virtual ~RsNetExamplePongItem() {}
+		virtual ~RsEasyTransportPongItem() {}
 	virtual std::ostream& print(std::ostream &out, uint16_t indent = 0);
 
 		uint32_t mSeqNo;
@@ -117,16 +117,16 @@ class RsNetExamplePongItem: public RsNetExampleItem
 		uint64_t mPongTS;
 };
 
-class RsNetExampleDataItem: public RsNetExampleItem
+class RsEasyTransportDataItem: public RsEasyTransportItem
 {
 	public:
-		RsNetExampleDataItem() :RsNetExampleItem(RS_PKT_SUBTYPE_NetExample_DATA) {}
-		RsNetExampleDataItem(void *data,uint32_t size) ; // de-serialization
+		RsEasyTransportDataItem() :RsEasyTransportItem(RS_PKT_SUBTYPE_EasyTransport_DATA) {}
+		RsEasyTransportDataItem(void *data,uint32_t size) ; // de-serialization
 
 		virtual bool serialise(void *data,uint32_t& size) ;
 		virtual uint32_t serial_size() const ; 							
 
-		virtual ~RsNetExampleDataItem()
+		virtual ~RsEasyTransportDataItem()
 		{
 			//free(net_example_data) ;
 			//net_example_data = NULL ;
@@ -134,65 +134,63 @@ class RsNetExampleDataItem: public RsNetExampleItem
 		virtual std::ostream& print(std::ostream &out, uint16_t indent = 0);
 
 		uint32_t flags ;
-		uint32_t data_size ;
-//		void *net_example_data ;
-//	private:
+        uint32_t data_size ;
 		std::string m_msg;
 };
 
-class RsNetExamplePaintItem: public RsNetExampleItem
+class RsEasyTransportPaintItem: public RsEasyTransportItem
 {
 	public:
-		RsNetExamplePaintItem() :RsNetExampleItem(RS_PKT_SUBTYPE_NetExample_PAINT) {}
-		RsNetExamplePaintItem(void *data,uint32_t size) ;
+		RsEasyTransportPaintItem() :RsEasyTransportItem(RS_PKT_SUBTYPE_EasyTransport_PAINT) {}
+		RsEasyTransportPaintItem(void *data,uint32_t size) ;
 
-		enum { NetExampleProtocol_Ring = 1, NetExampleProtocol_Ackn = 2, NetExampleProtocol_Close = 3, NetExampleProtocol_Bandwidth = 4 } ;
+		enum { EasyTransportProtocol_Ring = 1, EasyTransportProtocol_Ackn = 2, EasyTransportProtocol_Close = 3, EasyTransportProtocol_Bandwidth = 4 } ;
 
 		virtual bool serialise(void *data,uint32_t& size) ;
 		virtual uint32_t serial_size() const ;
 
-		virtual ~RsNetExamplePaintItem() {}
+		virtual ~RsEasyTransportPaintItem() {}
 		virtual std::ostream& print(std::ostream &out, uint16_t indent = 0);
 
 		uint32_t x ;
 		uint32_t y ;
 };
 
-class RsNetExampleProtocolItem: public RsNetExampleItem
+class RsEasyTransportProtocolItem: public RsEasyTransportItem
 {
 	public:
-		RsNetExampleProtocolItem() :RsNetExampleItem(RS_PKT_SUBTYPE_NetExample_PROTOCOL) {}
-		RsNetExampleProtocolItem(void *data,uint32_t size) ;
+		RsEasyTransportProtocolItem() :RsEasyTransportItem(RS_PKT_SUBTYPE_EasyTransport_PROTOCOL) {}
+		RsEasyTransportProtocolItem(void *data,uint32_t size) ;
 
-		enum { NetExampleProtocol_Ring = 1, NetExampleProtocol_Ackn = 2, NetExampleProtocol_Close = 3, NetExampleProtocol_Bandwidth = 4 } ;
+		enum { EasyTransportProtocol_Ring = 1, EasyTransportProtocol_Ackn = 2, EasyTransportProtocol_Close = 3, EasyTransportProtocol_Bandwidth = 4 } ;
 
 		virtual bool serialise(void *data,uint32_t& size) ;
 		virtual uint32_t serial_size() const ; 							
 
-		virtual ~RsNetExampleProtocolItem() {}
+		virtual ~RsEasyTransportProtocolItem() {}
 		virtual std::ostream& print(std::ostream &out, uint16_t indent = 0);
 
 		uint32_t protocol ;
 		uint32_t flags ;
 };
 
-class RsNetExampleSerialiser: public RsSerialType
+class RsEasyTransportSerialiser: public RsSerialType
 {
 	public:
-		RsNetExampleSerialiser()
-			:RsSerialType(RS_PKT_VERSION_SERVICE, RS_SERVICE_TYPE_NetExample_PLUGIN)
+		RsEasyTransportSerialiser()
+			:RsSerialType(RS_PKT_VERSION_SERVICE, RS_SERVICE_TYPE_EasyTransport_PLUGIN)
 		{ 
 		}
-		virtual ~RsNetExampleSerialiser() {}
+		virtual ~RsEasyTransportSerialiser() {}
 
 		virtual uint32_t 	size (RsItem *item) 
 		{ 
-			return dynamic_cast<RsNetExampleItem *>(item)->serial_size() ;
+			return dynamic_cast<RsEasyTransportItem *>(item)->serial_size() ;
 		}
 
 		virtual	bool serialise  (RsItem *item, void *data, uint32_t *size)
 		{ 
-			return dynamic_cast<RsNetExampleItem *>(item)->serialise(data,*size) ;
+			return dynamic_cast<RsEasyTransportItem *>(item)->serialise(data,*size) ;
 		}
 		virtual	RsItem *deserialise(void *data, uint32_t *size);
 };

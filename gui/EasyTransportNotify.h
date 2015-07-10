@@ -32,11 +32,11 @@
 
 #include <QObject>
 
-class NetExampleNotify : public QObject
+class EasyTransportNotify : public QObject
 {
 	Q_OBJECT
 public:
-	explicit NetExampleNotify(QObject *parent = 0);
+	explicit EasyTransportNotify(QObject *parent = 0);
 	void notifyReceivedPaint(const RsPeerId &peer_id, int x, int y) ;
 	void notifyReceivedMsg(const RsPeerId &peer_id, QString str) ;
 

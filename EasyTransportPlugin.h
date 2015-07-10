@@ -21,25 +21,25 @@
  ****************************************************************/
 #pragma once
 
-/*NetExample*/
-#include "services/p3NetExample.h"
+/*EasyTransport*/
+#include "services/p3EasyTransport.h"
 
 /*libretroshare"*/
 #include <retroshare/rsplugin.h>
 
 #include "gui/NEMainpage.h"
 
-class NetExampleGUIHandler ;
-class NetExampleNotify ;
+class EasyTransportGUIHandler ;
+class EasyTransportNotify ;
 
-class NetExamplePlugin: public RsPlugin
+class EasyTransportPlugin: public RsPlugin
 {
 	public:
-		NetExamplePlugin() ;
-		virtual ~NetExamplePlugin() {}
+		EasyTransportPlugin() ;
+		virtual ~EasyTransportPlugin() {}
 
 		virtual p3Service      *p3_service() 			const	;
-		virtual uint16_t        rs_service_id()         const { return RS_SERVICE_TYPE_NetExample_PLUGIN ; }
+		virtual uint16_t        rs_service_id()         const { return RS_SERVICE_TYPE_EasyTransport_PLUGIN ; }
 		//virtual ConfigPage     *qt_config_page()        const ;
 		virtual QDialog        *qt_about_page()         const ;
 		//virtual ChatWidgetHolder *qt_get_chat_widget_holder(ChatWidget *chatWidget) const ;
@@ -63,14 +63,14 @@ class NetExamplePlugin: public RsPlugin
 		virtual MainPage       *qt_page()       			const	;
 
 	private:
-		mutable p3NetExample *mNetExample ;
+		mutable p3EasyTransport *mEasyTransport ;
 		mutable RsPluginHandler *mPlugInHandler;
 		mutable RsPeers* mPeers;
 		mutable ConfigPage *config_page ;
 		mutable QIcon *mIcon;
 		mutable MainPage* mainpage ;
 
-		NetExampleNotify *mNetExampleNotify ;
-		NetExampleGUIHandler *mNetExampleGUIHandler ;
+		EasyTransportNotify *mEasyTransportNotify ;
+		EasyTransportGUIHandler *mEasyTransportGUIHandler ;
 };
 

@@ -25,17 +25,17 @@
 #include <list>
 #include <string>
 
-#include "services/rsNetExampleItems.h"
+#include "services/rsEasyTransportItems.h"
 #include "services/p3service.h"
 #include "serialiser/rstlvbase.h"
 #include "serialiser/rsconfigitems.h"
 #include "plugins/rspqiservice.h"
-#include <interface/rsNetExample.h>
+#include <interface/rsEasyTransport.h>
 
 class p3LinkMgr;
-class NetExampleNotify ;
+class EasyTransportNotify ;
 
-class NetExamplePeerInfo
+class EasyTransportPeerInfo
 {
 	public:
 
@@ -51,8 +51,8 @@ class NetExamplePeerInfo
 	uint32_t total_bytes_received ;
 	uint32_t average_incoming_bandwidth ;
 
-	std::list<RsNetExamplePongResult> mPongResults;
-	std::list<RsNetExampleDataItem*> incoming_queue ;
+	std::list<RsEasyTransportPongResult> mPongResults;
+	std::list<RsEasyTransportDataItem*> incoming_queue ;
 };
 
 
@@ -62,31 +62,31 @@ class NetExamplePeerInfo
   * This is only used to test Latency for the moment.
   */
 
-class p3NetExample: public RsPQIService, public RsNetExample
+class p3EasyTransport: public RsPQIService, public RsEasyTransport
 // Maybe we inherit from these later - but not needed for now.
 //, public p3Config, public pqiMonitor
 {
 	public:
-		p3NetExample(RsPluginHandler *cm,NetExampleNotify *);
+		p3EasyTransport(RsPluginHandler *cm,EasyTransportNotify *);
 
-		/***** overloaded from rsNetExample *****/
+		/***** overloaded from rsEasyTransport *****/
 
-		virtual uint32_t getPongResults(const RsPeerId &id, int n, std::list<RsNetExamplePongResult> &results);
+		virtual uint32_t getPongResults(const RsPeerId &id, int n, std::list<RsEasyTransportPongResult> &results);
 
 		// Call stuff.
 		//
 
 		// Sending data. The client keeps the memory ownership and must delete it after calling this.
-		virtual int sendNetExampleData(const RsPeerId &peer_id,const RsNetExampleDataChunk& chunk) ;
+		virtual int sendEasyTransportData(const RsPeerId &peer_id,const RsEasyTransportDataChunk& chunk) ;
 
 		// The server fill in the data and gives up memory ownership. The client must delete the memory
 		// in each chunk once it has been used.
 		//
-		virtual bool getIncomingData(const RsPeerId& peer_id,std::vector<RsNetExampleDataChunk>& chunks) ;
+		virtual bool getIncomingData(const RsPeerId& peer_id,std::vector<RsEasyTransportDataChunk>& chunks) ;
 
-		virtual int sendNetExampleHangUpCall(const RsPeerId& peer_id) ;
-		virtual int sendNetExampleRinging(const RsPeerId& peer_id) ;
-		virtual int sendNetExampleAcceptCall(const RsPeerId &peer_id) ;
+		virtual int sendEasyTransportHangUpCall(const RsPeerId& peer_id) ;
+		virtual int sendEasyTransportRinging(const RsPeerId& peer_id) ;
+		virtual int sendEasyTransportAcceptCall(const RsPeerId &peer_id) ;
 
 		/***** overloaded from p3Service *****/
 		/*!
@@ -125,32 +125,32 @@ class p3NetExample: public RsPQIService, public RsNetExample
 		void 	sendPingMeasurements();
 		void 	sendBandwidthInfo();
 
-		int sendNetExampleBandwidth(const RsPeerId &peer_id,uint32_t bytes_per_sec) ;
+		int sendEasyTransportBandwidth(const RsPeerId &peer_id,uint32_t bytes_per_sec) ;
 
-		int 	handlePing(RsNetExamplePingItem *item);
-		int 	handlePong(RsNetExamplePongItem *item);
+		int 	handlePing(RsEasyTransportPingItem *item);
+		int 	handlePong(RsEasyTransportPongItem *item);
 
 		int 	storePingAttempt(const RsPeerId &id, double ts, uint32_t mCounter);
 		int 	storePongResult(const RsPeerId& id, uint32_t counter, double ts, double rtt, double offset);
 
-		void handleProtocol(RsNetExampleProtocolItem*) ;
-		void handlePaint(RsNetExamplePaintItem *item);
-		void handleData(RsNetExampleDataItem*) ;
+		void handleProtocol(RsEasyTransportProtocolItem*) ;
+		void handlePaint(RsEasyTransportPaintItem *item);
+		void handleData(RsEasyTransportDataItem*) ;
 
-		RsMutex mNetExampleMtx;
+		RsMutex mEasyTransportMtx;
 
-		NetExamplePeerInfo *locked_GetPeerInfo(const RsPeerId& id);
+		EasyTransportPeerInfo *locked_GetPeerInfo(const RsPeerId& id);
 
 		static RsTlvKeyValue push_int_value(const std::string& key,int value) ;
 		static int pop_int_value(const std::string& s) ;
 
-		std::map<RsPeerId, NetExamplePeerInfo> mPeerInfo;
+		std::map<RsPeerId, EasyTransportPeerInfo> mPeerInfo;
 		time_t mSentPingTime;
 		time_t mSentBandwidthInfoTime;
 		uint32_t mCounter;
 
 		RsServiceControl *mServiceControl;
-		NetExampleNotify *mNotify ;
+		EasyTransportNotify *mNotify ;
 
 		int _atransmit ;
 		int _voice_hold ;
