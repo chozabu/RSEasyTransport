@@ -119,7 +119,8 @@ class p3EasyTransport: public RsPQIService, public RsEasyTransport
 		void 	ping_all();
 
 		void broadcast_paint(int x, int y);
-		void 	msg_all(std::string msg);
+			void 	msg_all(std::string msg);
+			void 	msg_peer(std::string msg, RsPeerId peerId);
 	private:
 		int   sendPackets();
 		void 	sendPingMeasurements();

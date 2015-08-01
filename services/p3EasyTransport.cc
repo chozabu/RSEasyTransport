@@ -209,10 +209,53 @@ int p3EasyTransport::sendEasyTransportAcceptCall(const RsPeerId& peer_id)
 
 	return true ;
 }
+void p3EasyTransport::msg_peer(std::string msg, RsPeerId peerId){
+
+	//std::set<RsPeerId> onlineIds;
+	std::list< RsPeerId > onlineIds;
+	//    mServiceControl->getPeersConnected(getServiceInfo().mServiceType, onlineIds);
+	rsPeers->getOnlineList(onlineIds);
+
+	double ts = getCurrentTS();
+
+#ifdef DEBUG_EasyTransport
+	std::cerr << "p3EasyTransport::msg_peer() @ts: " << ts;
+	std::cerr << std::endl;
+#endif
+
+	/* prepare packets */
+	std::list<RsPeerId>::iterator it;
+	//for(it = onlineIds.begin(); it != onlineIds.end(); it++)
+
+#ifdef DEBUG_EasyTransport
+	std::cerr << "p3EasyTransport::msg_all() MSging: " << peerId;
+	std::cerr << std::endl;
+#endif
+
+	std::cout << "MSging: " << peerId.toStdString() << "\n";
+	/* create the packet */
+	RsEasyTransportDataItem *pingPkt = new RsEasyTransportDataItem();
+	pingPkt->PeerId(peerId);
+	pingPkt->m_msg = msg;
+	pingPkt->data_size = msg.size();
+	//pingPkt->mSeqNo = mCounter;
+	//pingPkt->mPingTS = convertTsTo64bits(ts);
+
+	//storePingAttempt(*it, ts, mCounter);
+
+#ifdef DEBUG_EasyTransport
+	std::cerr << "p3EasyTransport::msg_all() With Packet:";
+	std::cerr << std::endl;
+	pingPkt->print(std::cerr, 10);
+#endif
+
+	sendItem(pingPkt);
+
+
+	//RsStackMutex stack(mEasyTransportMtx); /****** LOCKED MUTEX *******/
+	//mCounter++;
+}
 void p3EasyTransport::msg_all(std::string msg){
-	/* we ping our peers */
-	//if(!mServiceControl)
-	//    return ;
 
 	//std::set<RsPeerId> onlineIds;
 	std::list< RsPeerId > onlineIds;
