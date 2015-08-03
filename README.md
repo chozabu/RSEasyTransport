@@ -1,7 +1,7 @@
 RS .6 EasyTransport Plugin
 ==================
 
-This plugin should provide a simple interface to other plugins, allowing them to talk accross a network more easily
+This plugin should provide a simple interface to other plugins, allowing them to talk across a network easily
 
 ##Example
 
