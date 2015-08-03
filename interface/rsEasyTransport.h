@@ -30,6 +30,7 @@
 #include <list>
 #include <vector>
 #include <retroshare/rstypes.h>
+#include "gui/EasyTransportNotify.h"
 
 class RsEasyTransport ;
 extern RsEasyTransport *rsEasyTransport;
@@ -70,6 +71,7 @@ class RsEasyTransport
 	virtual void broadcast_paint(int x, int y) = 0;
 	virtual void msg_peer(std::string msg, RsPeerId peerId) = 0;
 	virtual void msg_all(std::string msg) = 0;
+	EasyTransportNotify *mNotify =0 ;
 		// Sending data. The client keeps the memory ownership and must delete it after calling this.
 		virtual int sendEasyTransportData(const RsPeerId& peer_id,const RsEasyTransportDataChunk& chunk) = 0;
 
