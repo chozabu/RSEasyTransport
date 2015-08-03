@@ -20,5 +20,5 @@ This plugin should provide a simple interface to other plugins, allowing them to
 
 
 
-This is somewhat based on the Example, and in turn VOIP plugin.
+This is based on the ExamplePlugin, and in turn VOIP plugin.
 
